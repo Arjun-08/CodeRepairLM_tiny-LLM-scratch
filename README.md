@@ -45,12 +45,12 @@ Unit Tests
 The model is trained using next-token language modeling:
 
 $$
-P(x_1,x_2,\ldots,x_T)
+P(x_1, x_2, \ldots, x_T)
 =
-\prod_{t=1}^{T}
-P(x_t\mid x_{<t})
+\prod_{t=1}^{T} P(x_t \mid x_{<t})
 $$
 
+where $x_{<t}$ denotes all tokens preceding position $t$.
 The ultimate objective is not merely to generate text that resembles the reference solution, but to generate **valid and executable Python repairs**.
 
 ---
@@ -58,7 +58,7 @@ The ultimate objective is not merely to generate text that resembles the referen
 # Key Highlights
 
 | Area                      | Implementation                           |
-| ------------------------- | ---------------------------------------- |
+| ------------------------- | ----------------------------------------- |
 | Language                  | Python                                   |
 | Framework                 | PyTorch                                  |
 | Model                     | Decoder-only Transformer                 |
@@ -223,7 +223,7 @@ Next Token
 The default model is intentionally small.
 
 | Hyperparameter            |            Value |
-| ------------------------- | ---------------: |
+| -------------------------- | ----------------: |
 | Vocabulary size           |              512 |
 | Model dimension           |               64 |
 | Attention heads           |                4 |
@@ -248,7 +248,7 @@ The small architecture is intentional: the objective is transparency and underst
 
 ## 1. Token Embeddings
 
-Let the vocabulary size be \(V\) and embedding dimension be \(d\).
+Let the vocabulary size be $V$ and embedding dimension be $d$.
 
 The learned embedding matrix is:
 
@@ -256,7 +256,7 @@ $$
 E\in\mathbb{R}^{V\times d}
 $$
 
-For token \(x_t\):
+For token $x_t$:
 
 $$
 h_t = E[x_t]
@@ -284,7 +284,7 @@ $$
 
 # 3. Causal Self-Attention
 
-For hidden states \(X\):
+For hidden states $X$:
 
 $$
 Q=XW_Q
@@ -305,7 +305,7 @@ S=
 \frac{QK^T}{\sqrt{d_h}}
 $$
 
-where \(d_h\) is the dimensionality of one attention head.
+where $d_h$ is the dimensionality of one attention head.
 
 A causal mask prevents access to future tokens:
 
@@ -338,7 +338,7 @@ $$
 
 # 4. Multi-Head Attention
 
-For \(H\) attention heads:
+For $H$ attention heads:
 
 $$
 \operatorname{head}_i
@@ -370,7 +370,7 @@ The implementation explicitly performs the head splitting, attention calculation
 
 # 5. Layer Normalization
 
-For hidden vector \(x\):
+For hidden vector $x$:
 
 $$
 \mu=
@@ -556,7 +556,7 @@ p_{t+1}
 \right)
 $$
 
-where \(\tau\) is the temperature.
+where $\tau$ is the temperature.
 
 Then:
 
@@ -603,7 +603,7 @@ is represented as a sequence of Python-aware tokens rather than characters.
 ### Special Tokens
 
 | Token    | Purpose                |
-| -------- | ---------------------- |
+| -------- | ----------------------- |
 | `<PAD>`  | Sequence padding       |
 | `<UNK>`  | Unknown token          |
 | `<BOS>`  | Beginning of sequence  |
@@ -682,7 +682,7 @@ Padding tokens are excluded from the loss.
 
 # Cross-Entropy
 
-For target token \(y\) and predicted probability \(p_y\):
+For target token $y$ and predicted probability $p_y$:
 
 $$
 \mathcal{L}_{CE}
@@ -755,8 +755,8 @@ $$
 
 where:
 
-* \(\eta\) is the learning rate
-* \(\lambda\) is weight decay
+* $\eta$ is the learning rate
+* $\lambda$ is weight decay
 
 ---
 
@@ -811,7 +811,7 @@ g
 \right)
 $$
 
-with a maximum gradient norm of \(1.0\).
+with a maximum gradient norm of $1.0$.
 
 This prevents unusually large gradients from destabilizing optimization.
 
@@ -1050,7 +1050,7 @@ The current implementation uses the repository's repair-success evaluation crite
 The latest successful training run produced the following measured results:
 
 | Metric               |   Result |
-| -------------------- | -------: |
+| --------------------- | -------: |
 | Training Loss        |   6.2248 |
 | Validation Loss      |   6.1315 |
 | Perplexity           | 460.1169 |
@@ -1065,7 +1065,7 @@ The latest successful training run produced the following measured results:
 ### Training Progress
 
 | Epoch | Training Loss | Validation Loss | Perplexity |
-| ----: | ------------: | --------------: | ---------: |
+| ----: | -------------: | ----------------: | ---------: |
 |     1 |        6.3800 |          6.2155 |   500.4449 |
 |     2 |        6.3316 |          6.1775 |   481.8091 |
 |     3 |        6.2841 |          6.1501 |   468.7534 |
@@ -1202,7 +1202,7 @@ The project includes an interactive Streamlit application.
 The interface accepts:
 
 | Input           | Description                             |
-| --------------- | --------------------------------------- |
+| ---------------- | ----------------------------------------- |
 | Buggy Code      | Python code containing the defect       |
 | Bug Description | Optional natural-language explanation   |
 | Error Message   | Optional traceback/compiler information |
@@ -1692,7 +1692,7 @@ The execution environment is designed for experimentation rather than security-c
 * execution-guided decoding
 * multi-candidate generation
 * candidate ranking
-* best-of-\(k\) repair
+* best-of-$k$ repair
 * confidence estimation
 * repair-by-iteration analysis
 
