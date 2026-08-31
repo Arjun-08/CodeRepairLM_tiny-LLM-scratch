@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "code-repair-lm"
+version = "0.1.0"
+description = "Python-only CodeRepairLM for code repair"
+readme = ""
+requires-python = ">=3.10"
+dependencies = [
+  "torch>=2.0.0",
+  "numpy>=1.24.0",
+  "streamlit>=1.35.0",
+  "pytest>=7.0.0",
+]
+
+[tool.setuptools]
+packages = ["code_repair_lm"]

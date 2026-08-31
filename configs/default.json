@@ -1,0 +1,19 @@
+{
+  "vocab_size": 512,
+  "d_model": 64,
+  "n_head": 4,
+  "n_layer": 2,
+  "block_size": 128,
+  "ff_dim": 128,
+  "dropout": 0.1,
+  "learning_rate": 0.0005,
+  "weight_decay": 0.01,
+  "batch_size": 4,
+  "epochs": 5,
+  "eval_every": 10,
+  "checkpoint_dir": "checkpoints",
+  "seed": 1337,
+  "max_new_tokens": 128,
+  "max_repair_iters": 3,
+  "device": "cpu"
+}

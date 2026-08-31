@@ -1,0 +1,11 @@
+{
+  "validation_loss": 6.528133869171143,
+  "perplexity": 684.120361447818,
+  "token_accuracy": 0.015024837434304156,
+  "exact_match_accuracy": 0.0,
+  "mean_edit_distance": 379.2,
+  "syntax_validity_rate": 0.0,
+  "executable_code_rate": 0.0,
+  "unit_test_pass_rate": 0.0,
+  "repair_success_rate": 0.0
+}
