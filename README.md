@@ -906,27 +906,7 @@ This is one of the key motivations for including execution-based evaluation in C
 
 The repository also contains an iterative repair loop.
 
-```mermaid
-flowchart TD
-    A["Buggy Python Code"] --> B["Generate Candidate Repair"]
-    B --> C["Compile"]
-    
-    C -->|Invalid| D["Capture Syntax Error"]
-    C -->|Valid| E["Execute"]
-
-    E -->|Runtime Error| F["Capture Runtime Error"]
-    E -->|Success| G["Run Unit Tests"]
-
-    G -->|Fail| H["Capture Test Failure"]
-    G -->|Pass| I["Return Successful Repair"]
-
-    D --> J{"Iterations Remaining?"}
-    F --> J
-    H --> J
-
-    J -->|Yes| B
-    J -->|No| K["Return Best Candidate"]
-```
+<img width="1873" height="1662" alt="mermaid-diagram (3)" src="https://github.com/user-attachments/assets/2e52a6a9-b6da-4d69-b041-74a60886c117" />
 
 Each iteration can use the observed failure information to construct the next repair attempt.
 
