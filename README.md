@@ -1564,17 +1564,4 @@ The current experimental results establish a baseline for the architecture. The 
 
 ---
 
-# Author
 
-**Arjun Sagar N V**
-
-M.Tech, Signal Processing
-Indian Institute of Science (IISc), Bengaluru
-
-GitHub: [Arjun-08](https://github.com/Arjun-08)
-
----
-
-## Repository
-
-[CodeRepairLM — Tiny LLM](https://github.com/Arjun-08/CodeRepairLM_tiny-LLM)
