@@ -802,15 +802,8 @@ Lower perplexity indicates better next-token modeling of the validation corpus.
 
 ## Token Accuracy
 
-$$
-\text{Token Accuracy}
-=
-\frac{
-\text{Number of Matching Tokens}
-}{
-\text{Number of Compared Tokens}
-}
-$$
+<img width="551" height="85" alt="image" src="https://github.com/user-attachments/assets/f2f19e91-d2ae-4f25-9378-2b48530ca369" />
+
 
 This measures token-level generation accuracy.
 
@@ -818,14 +811,8 @@ This measures token-level generation accuracy.
 
 ## Exact Match
 
-$$
-EM
-=
-\frac{1}{N}
-\sum_{i=1}^{N}
-\mathbf{1}
-[\hat{y}_i=y_i]
-$$
+<img width="290" height="108" alt="image" src="https://github.com/user-attachments/assets/3cda6f9c-0075-4565-86de-6312f4afee90" />
+
 
 The generated repair must exactly match the reference solution.
 
@@ -835,16 +822,8 @@ The generated repair must exactly match the reference solution.
 
 The implementation calculates Levenshtein distance.
 
-$$
-D(i,j)
-=
-\min
-\begin{cases}
-D(i-1,j)+1\\
-D(i,j-1)+1\\
-D(i-1,j-1)+[x_i\neq y_j]
-\end{cases}
-$$
+<img width="465" height="133" alt="image" src="https://github.com/user-attachments/assets/5cf4a130-faa7-4d8c-9c43-05fabd212818" />
+
 
 Lower is better.
 
@@ -860,29 +839,15 @@ compile(code, "<repair>", "exec")
 
 The metric is:
 
-$$
-\text{Syntax Validity}
-=
-\frac{
-\text{Syntactically Valid Repairs}
-}{
-N
-}
-$$
+<img width="518" height="86" alt="image" src="https://github.com/user-attachments/assets/dafebaa8-6b85-4931-96ea-41d10392d903" />
+
 
 ---
 
 ## Executable-Code Rate
 
-$$
-\text{Executable Rate}
-=
-\frac{
-\text{Repairs Executing Successfully}
-}{
-N
-}
-$$
+<img width="568" height="77" alt="image" src="https://github.com/user-attachments/assets/2571b245-28eb-41a5-884d-75a30ac0b1af" />
+
 
 This captures runtime correctness beyond syntax.
 
@@ -890,15 +855,8 @@ This captures runtime correctness beyond syntax.
 
 ## Unit-Test Pass Rate
 
-$$
-\text{Test Pass Rate}
-=
-\frac{
-\text{Repairs Passing Tests}
-}{
-N
-}
-$$
+<img width="458" height="79" alt="image" src="https://github.com/user-attachments/assets/59790b4f-2cae-420f-a3e4-92c07741ac9a" />
+
 
 This is particularly important for program-repair systems because functional correctness matters more than textual similarity.
 
@@ -906,15 +864,8 @@ This is particularly important for program-repair systems because functional cor
 
 ## Repair Success Rate
 
-$$
-\text{Repair Success Rate}
-=
-\frac{
-\text{Successful Repairs}
-}{
-N
-}
-$$
+<img width="464" height="82" alt="image" src="https://github.com/user-attachments/assets/45298662-a782-40e5-8d52-ae66e68d4f32" />
+
 
 The current implementation uses the repository's repair-success evaluation criteria.
 
