@@ -44,11 +44,8 @@ Unit Tests
 
 The model is trained using next-token language modeling:
 
-$$
-P(x_1, x_2, \ldots, x_T)
-=
-\prod_{t=1}^{T} P(x_t \mid x_{<t})
-$$
+<img width="407" height="91" alt="image" src="https://github.com/user-attachments/assets/696b9ac0-a62a-4fad-b25a-c6169872b7df" />
+
 
 where $x_{<t}$ denotes all tokens preceding position $t$.
 The ultimate objective is not merely to generate text that resembles the reference solution, but to generate **valid and executable Python repairs**.
@@ -268,11 +265,7 @@ $$
 
 Because self-attention does not inherently encode token order, learned positional embeddings are added:
 
-$$
-h_t^{(0)}
-=
-E[x_t]+P[t]
-$$
+<img width="204" height="57" alt="image" src="https://github.com/user-attachments/assets/7790d9ab-1e01-4757-abdd-843968dda9db" />
 
 where:
 
@@ -309,24 +302,13 @@ where $d_h$ is the dimensionality of one attention head.
 
 A causal mask prevents access to future tokens:
 
-$$
-M_{ij}
-=
-\begin{cases}
-0,&j\leq i\\
--\infty,&j>i
-\end{cases}
-$$
+<img width="245" height="101" alt="image" src="https://github.com/user-attachments/assets/ec118cd7-36ac-4341-9a0e-84ef96554ea3" />
+
 
 The attention matrix becomes:
 
-$$
-A=
-\operatorname{softmax}
-\left(
-\frac{QK^T}{\sqrt{d_h}}+M
-\right)
-$$
+<img width="320" height="110" alt="image" src="https://github.com/user-attachments/assets/d487f126-e128-4619-a243-6d848153a164" />
+
 
 The attention output is:
 
@@ -340,29 +322,18 @@ $$
 
 For $H$ attention heads:
 
-$$
-\operatorname{head}_i
-=
-\operatorname{Attention}(Q_i,K_i,V_i)
-$$
+<img width="334" height="49" alt="image" src="https://github.com/user-attachments/assets/beae1104-ac95-480a-8989-4e30b8648af7" />
+
 
 The outputs are concatenated:
 
-$$
-Z=
-\operatorname{Concat}
-(
-\operatorname{head}_1,
-\ldots,
-\operatorname{head}_H
-)
-$$
+<img width="352" height="50" alt="image" src="https://github.com/user-attachments/assets/0ccb8c3f-863f-42e1-af06-9ff44aa5af04" />
+
 
 and projected:
 
-$$
-\operatorname{MHA}(X)=ZW_O
-$$
+<img width="204" height="51" alt="image" src="https://github.com/user-attachments/assets/b7256663-fa13-4a1f-872e-f6cb653a6acd" />
+
 
 The implementation explicitly performs the head splitting, attention calculation, causal masking, concatenation, and output projection.
 
@@ -386,12 +357,7 @@ $$
 
 Normalize:
 
-$$
-\hat{x}
-=
-\frac{x-\mu}
-{\sqrt{\sigma^2+\epsilon}}
-$$
+<img width="180" height="78" alt="image" src="https://github.com/user-attachments/assets/550a4579-4fab-428e-9506-4aa16f7e9ab5" />
 
 Apply learned parameters:
 
@@ -407,19 +373,8 @@ The repository contains a custom `LayerNorm` implementation.
 
 The feed-forward network uses GELU:
 
-$$
-\operatorname{GELU}(x)
-=
-\frac{1}{2}x
-\left[
-1+
-\tanh
-\left(
-\sqrt{\frac{2}{\pi}}
-(x+0.044715x^3)
-\right)
-\right]
-$$
+<img width="586" height="100" alt="image" src="https://github.com/user-attachments/assets/d25cdbee-c5bb-4475-ad1d-4a8d495395a2" />
+
 
 This activation is implemented directly rather than relying on a Transformer wrapper.
 
@@ -429,14 +384,7 @@ This activation is implemented directly rather than relying on a Transformer wra
 
 Each Transformer block contains a position-wise feed-forward network:
 
-$$
-\operatorname{FFN}(x)
-=
-W_2
-\operatorname{GELU}
-(W_1x+b_1)
-+b_2
-$$
+<img width="413" height="61" alt="image" src="https://github.com/user-attachments/assets/2af5e05e-a473-4c85-8bd4-82e6805c3ced" />
 
 Architecture:
 
@@ -464,24 +412,13 @@ The project uses a pre-LayerNorm Transformer formulation.
 
 Attention:
 
-$$
-X'
-=
-X+
-\operatorname{MHA}
-(\operatorname{LN}(X))
-$$
+<img width="287" height="64" alt="image" src="https://github.com/user-attachments/assets/b8567765-0351-4a39-bc3c-957b03e59c94" />
+
 
 Feed-forward:
 
-$$
-Y
-=
-X'
-+
-\operatorname{FFN}
-(\operatorname{LN}(X'))
-$$
+<img width="276" height="59" alt="image" src="https://github.com/user-attachments/assets/feb1cf0e-4709-4331-ae0f-9be927bcd7ee" />
+
 
 Therefore one Transformer block can be summarized as:
 
@@ -507,10 +444,8 @@ $$
 
 After the final Transformer block:
 
-$$
-H_L=
-\operatorname{LN}(H)
-$$
+<img width="152" height="60" alt="image" src="https://github.com/user-attachments/assets/bdc88c35-f509-4b0c-8a40-0b676756f8d7" />
+
 
 The hidden representation is projected to vocabulary space:
 
@@ -527,11 +462,8 @@ $$
 
 The next-token probability distribution is:
 
-$$
-P(x_{t+1}\mid x_{\leq t})
-=
-\operatorname{softmax}(z_t)
-$$
+<img width="316" height="60" alt="image" src="https://github.com/user-attachments/assets/f107fc36-1efb-4375-a929-eeaed1e0319c" />
+
 
 ---
 
@@ -547,14 +479,8 @@ $$
 
 the next-token distribution is:
 
-$$
-p_{t+1}
-=
-\operatorname{softmax}
-\left(
-\frac{z_t}{\tau}
-\right)
-$$
+<img width="241" height="60" alt="image" src="https://github.com/user-attachments/assets/b69f3ff9-a5ec-4e30-b0cc-ca9b24f2cd28" />
+
 
 where $\tau$ is the temperature.
 
@@ -665,14 +591,7 @@ $$
 
 the objective is:
 
-$$
-\mathcal{L}
-=
--\frac{1}{T}
-\sum_{t=1}^{T}
-\log
-P(x_t\mid x_{<t})
-$$
+<img width="317" height="99" alt="image" src="https://github.com/user-attachments/assets/473eb64a-88d8-4bae-8b62-17787e8da169" />
 
 This is standard causal language-model cross-entropy.
 
@@ -684,22 +603,12 @@ Padding tokens are excluded from the loss.
 
 For target token $y$ and predicted probability $p_y$:
 
-$$
-\mathcal{L}_{CE}
-=
--\log p_y
-$$
+<img width="201" height="67" alt="image" src="https://github.com/user-attachments/assets/9d1765ed-f0d2-4a53-9362-532f0bfc682c" />
 
 For the complete sequence:
 
-$$
-\mathcal{L}_{CE}
-=
--\frac{1}{T}
-\sum_{t=1}^{T}
-\log
-P(y_t\mid y_{<t})
-$$
+<img width="328" height="106" alt="image" src="https://github.com/user-attachments/assets/32f37831-7c81-4fda-a670-f1156f1aa74a" />
+
 
 The model minimizes this loss through backpropagation.
 
@@ -741,17 +650,8 @@ $$
 
 Parameter update:
 
-$$
-\theta_{t+1}
-=
-\theta_t
--
-\eta
-\frac{\hat{m}_t}
-{\sqrt{\hat{v}_t}+\epsilon}
--
-\eta\lambda\theta_t
-$$
+<img width="327" height="70" alt="image" src="https://github.com/user-attachments/assets/6654b3e2-32f2-4e12-ae60-9033cf43de29" />
+
 
 where:
 
@@ -764,21 +664,7 @@ where:
 
 The learning rate follows cosine annealing:
 
-$$
-\eta_t
-=
-\eta_{\min}
-+
-\frac{1}{2}
-(\eta_{\max}-\eta_{\min})
-\left[
-1+
-\cos
-\left(
-\frac{\pi t}{T}
-\right)
-\right]
-$$
+<img width="485" height="87" alt="image" src="https://github.com/user-attachments/assets/f9d4aacf-484d-48e4-871c-d79a76e7be5c" />
 
 This gradually decreases the learning rate throughout training.
 
@@ -788,13 +674,8 @@ This gradually decreases the learning rate throughout training.
 
 The training loop monitors gradient magnitude:
 
-$$
-\|g\|_2
-=
-\sqrt{
-\sum_i g_i^2
-}
-$$
+<img width="194" height="103" alt="image" src="https://github.com/user-attachments/assets/933c46e1-5185-4088-9860-1c314d5687ce" />
+
 
 Gradients are clipped using:
 
@@ -902,14 +783,8 @@ This layered evaluation is important because textual similarity alone does not e
 
 ## Validation Loss
 
-$$
-L_{val}
-=
--\frac{1}{N}
-\sum_{i=1}^{N}
-\log
-P(y_i\mid x_i)
-$$
+<img width="319" height="90" alt="image" src="https://github.com/user-attachments/assets/d664ecbf-34a4-4861-b0b9-ab2b8830c52b" />
+
 
 Lower is better.
 
