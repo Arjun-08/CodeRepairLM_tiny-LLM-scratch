@@ -118,43 +118,7 @@ No pretrained Transformer or high-level Transformer wrapper is used.
 
 # Architecture
 
-## High-Level Architecture
-
-```mermaid
-flowchart TD
-    A["Buggy Python Code"] --> E["Repair Prompt"]
-    B["Bug Description"] --> E
-    C["Error Message"] --> E
-    D["Unit Tests"] --> E
-
-    E --> F["Custom Python Tokenizer"]
-    F --> G["Token IDs"]
-
-    G --> H["Token Embeddings"]
-    H --> I["Learned Positional Embeddings"]
-
-    I --> J["Transformer Block 1"]
-    J --> K["Transformer Block 2"]
-    K --> L["Final LayerNorm"]
-
-    L --> M["Language Model Head"]
-    M --> N["Vocabulary Logits"]
-    N --> O["Softmax / Sampling"]
-    O --> P["Generated Repair"]
-
-    P --> Q["Syntax Validation"]
-    Q --> R["Execution"]
-    R --> S["Unit Tests"]
-
-    S --> T{"Tests Pass?"}
-
-    T -->|Yes| U["Final Repaired Code"]
-    T -->|No| V["Repair Feedback"]
-
-    V --> W{"Iterations Remaining?"}
-    W -->|Yes| E
-    W -->|No| X["Best Candidate"]
-```
+<img width="2306" height="3917" alt="mermaid-diagram" src="https://github.com/user-attachments/assets/f11d1ca7-9787-4ea3-95f1-47f964eb2e85" />
 
 ---
 
@@ -730,28 +694,7 @@ The data interface is modular and can be replaced with a larger real-world repai
 
 # Training Pipeline
 
-```mermaid
-flowchart LR
-    A["Repair Dataset"] --> B["Build Vocabulary"]
-    B --> C["Custom Tokenizer"]
-    C --> D["Token IDs"]
-    D --> E["Padding / Truncation"]
-
-    E --> F["CodeRepairLM"]
-    F --> G["Vocabulary Logits"]
-
-    E --> H["Target Tokens"]
-    G --> I["Cross-Entropy Loss"]
-    H --> I
-
-    I --> J["Backpropagation"]
-    J --> K["Gradient Clipping"]
-    K --> L["AdamW"]
-    L --> M["Cosine LR Scheduler"]
-    M --> F
-
-    F --> N["Checkpoint"]
-```
+<img width="3583" height="469" alt="mermaid-diagram (1)" src="https://github.com/user-attachments/assets/ce03b308-ff5e-442f-94db-d62e96007d54" />
 
 ---
 
@@ -759,21 +702,7 @@ flowchart LR
 
 Code generation is evaluated at multiple levels.
 
-```mermaid
-flowchart TD
-    A["Generated Repair"] --> B["Exact Match"]
-    A --> C["Edit Distance"]
-    A --> D["Syntax Validation"]
-
-    D -->|Valid| E["Execute Program"]
-    D -->|Invalid| F["Syntax Failure"]
-
-    E -->|Success| G["Run Unit Tests"]
-    E -->|Runtime Error| H["Execution Failure"]
-
-    G -->|Pass| I["Repair Success"]
-    G -->|Fail| J["Test Failure"]
-```
+<img width="1362" height="1251" alt="mermaid-diagram (2)" src="https://github.com/user-attachments/assets/ff0a2aed-5416-4ce5-bd69-133b767cf46f" />
 
 This layered evaluation is important because textual similarity alone does not establish that a program has actually been repaired.
 
