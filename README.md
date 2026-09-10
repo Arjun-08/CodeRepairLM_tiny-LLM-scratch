@@ -6,7 +6,7 @@
 
 Unlike projects that simply fine-tune an existing code LLM, CodeRepairLM implements the core language-modeling pipeline **from scratch**: a Python-aware tokenizer, causal self-attention, Transformer blocks, LayerNorm, GELU, autoregressive generation, training loop, evaluation framework, execution-based validation, and iterative repair.
 
-The project is intentionally small enough to understand and run locally while demonstrating the complete architecture behind an autoregressive code-repair system.
+The project is **intentionally small enough to understand and run locally** while demonstrating the complete architecture behind an autoregressive code-repair system.
 
 ---
 
