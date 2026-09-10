@@ -2,7 +2,7 @@
 
 ## A Tiny Python Code-Repair Language Model Built From Scratch
 
-**CodeRepairLM** is a compact decoder-only Transformer language model designed to automatically repair buggy Python code.
+**CodeRepairLM** is a compact **decoder-only Transformer** language model designed to automatically repair buggy Python code.
 
 Unlike projects that simply fine-tune an existing code LLM, CodeRepairLM implements the core language-modeling pipeline **from scratch**: a Python-aware tokenizer, causal self-attention, Transformer blocks, LayerNorm, GELU, autoregressive generation, training loop, evaluation framework, execution-based validation, and iterative repair.
 
